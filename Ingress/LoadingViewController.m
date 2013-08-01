@@ -370,10 +370,9 @@
 							[createCodenameField becomeFirstResponder];
 						});
 
-					} else if ([errorStr isEqualToString:@"CLIENT_MUST_UPGRADE"]) {
-						[label setText:@"You have to update app to play"];
 					} else {
 						[label setText:errorStr];
+						[label sizeToFit];
 					}
 					
 				}

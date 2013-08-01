@@ -412,7 +412,10 @@ NSString *const BanAlertDisplayed = @"BanAlertDisplayed";
 	
 //	NSLog(@"jsonString: %@", [jsonString substringFromIndex:9]);
 	
-	NSData *jsonData = [[jsonString substringFromIndex:9] dataUsingEncoding:NSUTF8StringEncoding];
+	if ([jsonString hasPrefix:@"while(1);"]) {
+		jsonString = [jsonString substringFromIndex:9];
+	}
+	NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
 	
 	NSError *jsonParseError;
 	id jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&jsonParseError];
@@ -438,14 +441,14 @@ NSString *const BanAlertDisplayed = @"BanAlertDisplayed";
 
 		if ([jsonObject[@"result"][@"pregameStatus"][@"action"] isEqualToString:@"CLIENT_MUST_UPGRADE"]) {
 			dispatch_async(dispatch_get_main_queue(), ^{
-				handler(@"CLIENT_MUST_UPGRADE");
+				handler(@"You have to update app to play.\nLook at www.ios-ingress.com");
 			});
 			return;
 		}
 		
-		if (![jsonObject[@"result"][@"canPlay"] boolValue]) {
+		if (![jsonObject[@"result"][@"pregameStatus"][@"action"] isEqualToString:@"NO_ACTIONS_REQUIRED"]) {
 			dispatch_async(dispatch_get_main_queue(), ^{
-				handler(@"You are not able to play");
+				handler(jsonObject[@"result"][@"pregameStatus"][@"action"]);
 			});
 			return;
 		}
