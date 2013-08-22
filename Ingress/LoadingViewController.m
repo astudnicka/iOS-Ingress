@@ -124,7 +124,7 @@
 
 	////////////////////////////////////////////
 	
-	UIDevice *device = [UIDevice currentDevice];
+//	UIDevice *device = [UIDevice currentDevice];
 	
 //	/// Device Info Dictionary
 //	NSDictionary *deviceInfo = @{
@@ -149,12 +149,12 @@
 	////////////////////////////////////////////
 
 	jsonDict = [@{
-				@"nemesisSoftwareVersion": @"2013-07-29T18:57:27Z 7af0d9a744b7 opt",
-				@"deviceSoftwareVersion": NULLIFNIL(device.systemVersion),
-//				@"a": NULLIFNIL(jsonDeviceInfo)
-	} mutableCopy];
-
-	versionString = @"v1.32.1";
+				  @"nemesisSoftwareVersion": @"2013-08-07T00:06:39Z a52083df5202 opt",
+				  @"deviceSoftwareVersion": NULLIFNIL(UIDevice.currentDevice.systemVersion),
+				  //				@"a": NULLIFNIL(jsonDeviceInfo)
+				  } mutableCopy];
+	
+	versionString = @"v1.33.0";
 	
 }
 
